@@ -167,7 +167,7 @@ details p{font-size:12.5px;color:#3f3f46;margin:7px 0 0}
   padding:9px 16px;border-radius:8px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .18s;z-index:99}
 #toast.ver{opacity:.95}#toast.mal{background:var(--mal)}
 
-/* teléfono: Nacho y Rosina esto lo miran caminando */
+/* teléfono: quienes coordinan esto lo miran caminando */
 @media (max-width:640px){
   body{overflow-x:hidden}
   .wrap{padding:14px 12px 80px}
@@ -193,7 +193,7 @@ details p{font-size:12.5px;color:#3f3f46;margin:7px 0 0}
   <img src="logo-color.svg" alt="Guamatur" style="height:34px;margin-bottom:18px">
   <h1 style="font-size:19px;margin:0 0 6px">Todavía no tenés acceso</h1>
   <p id="sinaccesoMail" style="color:var(--suave);font-size:13px"></p>
-  <p style="color:var(--suave);font-size:13px">Pedile a Nacho o a Rosina que te den de alta en el Plan Ventas+.</p>
+  <p style="color:var(--suave);font-size:13px">Escribile a infraestructura@guamatur.com para que te den de alta en el Plan Ventas+.</p>
   <button class="btn sec" id="btnSalir2">Salir</button>
 </div></div></div>
 
@@ -204,7 +204,7 @@ details p{font-size:12.5px;color:#3f3f46;margin:7px 0 0}
   <p id="sindatosQue" style="color:var(--suave);font-size:13px"></p>
   <p style="color:var(--suave);font-size:13px">Los ciclos y sus semanas se cargan en la base
   (migración <strong>003-seed.sql</strong>); el plantel también se puede dar de alta desde
-  <strong>Equipo y accesos</strong> una vez que haya un ciclo. Avisale a Nacho.</p>
+  <strong>Equipo y accesos</strong> una vez que haya un ciclo. Escribile a infraestructura@guamatur.com.</p>
   <button class="btn sec" id="btnSalir3">Salir</button>
 </div></div></div>
 
@@ -324,7 +324,7 @@ const CONFIG = {
   SUPABASE_URL: 'https://pjxdysmegbzcrgarcmwy.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqeGR5c21lZ2J6Y3JnYXJjbXd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMjM0MjQsImV4cCI6MjA5MTU5OTQyNH0.q1ikAwWW7PVM80Hpmgv01iIvODdv8fOBco8aATb5tAQ',
   OAUTH_DOMINIO: 'guamatur.com',
-  VERSION: 'v10',
+  VERSION: 'v11',
 };
 const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
   db: { schema: 'ventasplus' },
@@ -401,8 +401,8 @@ async function arrancar() {
     '<button data-v="' + v[0] + '">' + v[1] + '</button>').join('');
   $$('#nav button').forEach(b => b.onclick = () => irA(b.dataset.v));
   if (esDireccion()) { $('#btnConfig').style.display = ''; $('#btnConfig').onclick = () => irA('equipo'); }
-  // Cada uno entra donde estaba. Nacho vive en «Esta semana» y Rosina en «El programa»:
-  // mandarlos a los dos a la misma pantalla obliga a uno de los dos a navegar todos los días.
+  // Cada uno entra donde estaba. Uno vive en «Esta semana» y otro en «El programa»:
+  // mandarlos a todos a la misma pantalla obliga a alguno a navegar todos los días.
   const ultima = recordar();
   await irA(vistas.some(v => v[0] === ultima) ? ultima : vistas[0][0]);
   medirTope();
@@ -1513,7 +1513,7 @@ function pintarPrograma() {
 }
 
 // El ciclo entero en una planilla: es lo que va al memo del martes, y lo que la planilla
-// de Rosina daba de arranque. Sin esto la app obligaría a copiar números a mano.
+// con que arrancó el plan daba de arranque. Sin esto la app obligaría a copiar números a mano.
 function bajarCsv(nombre, cols, filas) {
   const csv = [cols].concat(filas).map(r => r.map(x =>
     '"' + String(x == null ? '' : x).replace(/"/g, '""') + '"').join(',')).join('\n');
